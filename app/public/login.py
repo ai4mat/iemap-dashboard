@@ -15,10 +15,20 @@ def on_click():
     else:
         st.warning("Wrong username or password")
 
-st.title("Login")
-c1, c2, c3 = st.columns([2,2,1])
-email = c1.text_input("Username:", "")
-pswd = c2.text_input("Password:", "", type="password")
+placeholder = st.empty()
+
+
+# Insert a form in the container
+with placeholder.form("register"):
+    st.markdown("#### Enter your informations")
+    email = st.text_input("Email")
+    pswd = st.text_input("Password", type="password")
+    submit = st.form_submit_button("Login", on_click=on_click)
+
+# st.title("Login")
+# c1, c2, c3 = st.columns([2,2,1])
+# email = c1.text_input("Username:", "")
+# pswd = c2.text_input("Password:", "", type="password")
 
 try:
     jwt_response = requests.post(urls.login, data={"username": email, "password": pswd})
@@ -29,9 +39,9 @@ try:
         st.session_state["token"] = token
     else:
         st.session_state["correct_password"] = False
-    c3.markdown("")
-    c3.markdown("")
-    c3.button("Login", on_click=on_click)
+    # c3.markdown("")
+    # c3.markdown("")
+    # c3.button("Login", on_click=on_click)
 except Exception as e:
     st.exception(e)
     mkd = """Please set the user and password."""

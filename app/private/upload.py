@@ -1,5 +1,5 @@
 import streamlit as st
-import requests, json, io
+import requests, json
 from components.endpoints import urls
 from requests_toolbelt import MultipartEncoder
 

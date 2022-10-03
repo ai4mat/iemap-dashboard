@@ -1,0 +1,44 @@
+{
+  "identifier": "DOI78965656565",
+  "project": { "name": "Battery-LiOn", "label": "PB" },
+  "process": {
+    "isExperiment": "true",
+    "method": "PCA",
+    "agent": { "name": "expresso", "version": "1.05" }
+  },
+  "material": {
+    "formula": "C6H12O6",
+    "input": {
+      "lattice": {
+        "a": "11.050",
+        "b": "10365",
+        "c": "5.635",
+        "alpha": "81.59",
+        "beta": "68.114",
+        "gamma": "30296"
+      },
+      "sites": "[ [x1,y1,z1], [x2, y2, z2], [x3, y3, z3] ]",
+      "species": "[H,H,H]"
+    },
+    "output": {
+      "lattice": {
+        "a": "11.050",
+        "b": "10365",
+        "c": "5.635",
+        "alpha": "81.59",
+        "beta": "68.114",
+        "gamma": "30296"
+      },
+      "sites": "[ [x1,y1,z1], [x2, y2, z2], [x3, y3, z3] ]",
+      "species": "[H,H,H]"
+    }
+  },
+  "parameters": [
+    { "name": "temperature", "value": 25.7 },
+    { "name": "type-crystal", "value": "type1" }
+  ],
+  "properties": [
+    { "name": "property1", "value": "value1" },
+    { "name": "numeric_pro", "value": 22.58 }
+  ]
+}

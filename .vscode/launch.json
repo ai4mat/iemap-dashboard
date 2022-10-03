@@ -1,0 +1,16 @@
+{
+"version": "0.1.0",
+"configurations": [
+    {
+        "name": "debug streamlit",
+        "cwd": "${fileDirname}",
+        "type": "python",
+        "request": "launch",
+        "program": "/home/eanx/miniconda3/envs/py10/bin/streamlit",  // /home/xx/tmp/venv/bin/streamlit",
+        "args": [
+            "run",
+            "app.py"
+        ]
+    }
+]
+}

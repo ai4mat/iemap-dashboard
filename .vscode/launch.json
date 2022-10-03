@@ -6,7 +6,7 @@
         "cwd": "${fileDirname}",
         "type": "python",
         "request": "launch",
-        "program": "/home/eanx/miniconda3/envs/py10/bin/streamlit",  // /home/xx/tmp/venv/bin/streamlit",
+        "program": "/Users/marco/pyvenvs/streamlit/bin/streamlit",  // /home/xx/tmp/venv/bin/streamlit",
         "args": [
             "run",
             "app.py"

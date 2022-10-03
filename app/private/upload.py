@@ -42,6 +42,7 @@ if uploaded_file is not None:
 if st.button("Load Data") and uploaded_file != None:
 
     f = BytesIO(uploaded_file.getvalue())
+    f.seek(0)
     m = MultipartEncoder(fields={"file": (uploaded_file.name, f, uploaded_file.type)})
     headers = {
         "Authorization": "Bearer " + st.session_state["token"],

@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit_book as stb
 
+
 # Set wide display
 st.set_page_config(layout="wide")
 
@@ -23,14 +24,21 @@ else:
                 menu_title="Authenticated User",
                 menu_icon="public",
                 options=[
-                    "Upload page",    
+                    "Upload page", 
+                    "Query DB",   
                     "Logout", 
                     ], 
                 paths=[
                     "private/upload.py", 
+                    "private/query.py",
                     "private/logout.py", 
                     ],
                 save_answers=False,
+                icons = [
+                    "upload",
+                    "archive",
+                    "box-arrow-right"
+                ],
                 styles={
                     "nav-link": {"--hover-color": "#aaddcc"},
                     "nav-link-selected": {"background-color": "#00c090"},
@@ -51,6 +59,11 @@ else:
                     "public/login.py", 
                     ],
                 save_answers=False,
+                icons = [
+                    "house",
+                    "pencil",
+                    "box-arrow-in-right"
+                ],
                 styles={
                     "nav-link": {"--hover-color": "#e9f6fb"},
                     "nav-link-selected": {"background-color": "#87CEEB"},

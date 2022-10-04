@@ -24,6 +24,7 @@ with placeholder.form(key="registration_form", clear_on_submit=True):
                 st.error("Sorry, something went wrong. Registration failed!")
             else:
                 pass
+            placeholder.empty()
         except Exception as e:
             st.exception(e)
             mkd = """Please set the user and password."""

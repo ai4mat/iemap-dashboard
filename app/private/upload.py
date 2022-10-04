@@ -1,6 +1,6 @@
 import streamlit as st
 import requests, json
-from io import StringIO, BytesIO
+from io import BytesIO
 from components.endpoints import urls
 from requests_toolbelt import MultipartEncoder
 
@@ -41,25 +41,38 @@ if uploaded_file is not None:
     )
 if st.button("Load Data") and uploaded_file != None:
 
-    f = BytesIO(uploaded_file.getvalue())
-    m = MultipartEncoder(fields={"file": (uploaded_file.name, f, uploaded_file.type)})
-    headers = {
-        "Authorization": "Bearer " + st.session_state["token"],
-        "Content-Type": m.content_type,
-    }
-    proj_data_response = requests.post(
-        urls.post_file
-        + st.session_state["proj_id"]
-        + "&file_name="
-        + uploaded_file.name,
-        headers=headers,
-        data=m,
-    )
-    if proj_data_response.status_code == 200:
-        st.success("Data uploaded successfully!")
-        st.text(proj_data_response.text)
-    elif proj_data_response.status_code == 422:
-        st.error("Metadata not uploaded. Validation error.")
-        st.text(proj_data_response.json())
-    else:
-        st.error("Metadata upload failed!")
+    # f = BytesIO(uploaded_file.getvalue())
+    with BytesIO(uploaded_file.getvalue()) as f:
+        file_data = f.read()
+        st.session_state["file_to_upload"] = file_data
+        # st.session_state["proj_id"] = "633ad6ef7550f1c6479b4e5d"
+
+        m = MultipartEncoder(
+            fields={
+                "file": (
+                    uploaded_file.name,
+                    st.session_state.file_to_upload,
+                    uploaded_file.type,
+                )
+            }
+        )
+        headers = {
+            "Authorization": "Bearer " + st.session_state["token"],
+            "Content-Type": m.content_type,
+        }
+        proj_data_response = requests.post(
+            urls.post_file
+            + st.session_state["proj_id"]
+            + "&file_name="
+            + uploaded_file.name,
+            headers=headers,
+            data=m,
+        )
+        if proj_data_response.status_code == 200:
+            st.success("Data uploaded successfully!")
+            st.text(proj_data_response.text)
+        elif proj_data_response.status_code == 422:
+            st.error("Metadata not uploaded. Validation error.")
+            st.text(proj_data_response.json())
+        else:
+            st.error("Metadata upload failed!")

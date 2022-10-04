@@ -21,7 +21,7 @@ with placeholder.form("register"):
     try:
         response = requests.post(urls.register, json=form_data)
         if submit and response.status_code == 201:
-            placeholder.empty()
+#            placeholder.form[0]
             st.success("Your are successfully registered! You can now login.")
         elif submit and response.status_code == 400:
             st.error("Sorry, something went wrong. Registration failed!")

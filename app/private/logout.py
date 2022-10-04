@@ -7,6 +7,7 @@ st.markdown("Click to logout")
 def on_click():
     import time
     st.session_state["admin_view"] = False
+    st.session_state["token"] = None
     st.success("Logged out")
     time.sleep(.25)
     query_dict = {}

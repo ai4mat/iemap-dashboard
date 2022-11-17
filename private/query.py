@@ -59,7 +59,7 @@ if st.button("Query"):
     response = requests.get(urls.query)
     df = get_df(response)
 
-    st.dataframe(df)
+    st.dataframe(df, use_container_width=True)
 #    on_click()
 
 # https://discuss.streamlit.io/t/how-to-set-page-config-default-layout-to-wide-without-calling-set-page-config/13872/2

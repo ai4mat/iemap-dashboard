@@ -4,7 +4,7 @@ import streamlit as st
 st.write("# Welcome to IEMAP ⚛️")
 
 
-video_file = open('files/register.webm', 'rb')
+video_file = open('files/register.m4v', 'rb')
 video_bytes = video_file.read()
 
 st.video(video_bytes)

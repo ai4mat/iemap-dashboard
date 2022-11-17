@@ -14,7 +14,7 @@ def get_df(response):
             "iemap_id": doc.get("iemap_id", None),
             "email": provenance["email"],
             "affiliation": provenance["affiliation"],
-            "created_at": provenance.get("created_at", None),
+            "created at": provenance.get("createdAt", None),
             "project": doc["project"]["name"],
             "process": "Experiment" if isExperiment else "Computation",
             "method": doc["process"].get("method", None),

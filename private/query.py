@@ -51,7 +51,7 @@ def get_df2(response):
     
     list_doc = []
     for doc in response.json():
-        dt = datetime.strptime(doc["date_creation"], "%Y-%m-%d")
+        dt = datetime.fromisoformat(doc["date_creation"])
         current_doc = {
             "iemap_id": doc.get("iemap_id", None),
             "project": doc.get("project_name", None),
@@ -62,7 +62,7 @@ def get_df2(response):
     df = pd.DataFrame(list_doc)
     return df
     
-
+2022-11-18T11:11:35.159000
 
 
 

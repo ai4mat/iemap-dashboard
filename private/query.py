@@ -1,5 +1,13 @@
 import streamlit as st
+import datetime 
 
+def get_date(datestring):
+    if datestring == None:
+        return None
+    else:
+        return datetime.strptime(datestring, "%Y-%m-%d")
+
+#2022-11-20T11:26:55.952000
 
 def get_df(response):
     import pandas as pd
@@ -46,7 +54,7 @@ def get_df2(response):
             "iemap_id": doc.get("iemap_id", None),
             "project": doc.get("project_name", None),
             "formula": doc.get("material", None),
-            "created at": doc.get("date_creation", None)
+            "created at": get_date(doc.get("date_creation", None))
             }
         list_doc.append(current_doc)
     df = pd.DataFrame(list_doc)
@@ -91,8 +99,6 @@ if st.button("Get your data"):
         
         df = get_df2(response)
         st.dataframe(df, use_container_width=True)
-        # for doc in response.json():
-        #     st.write(doc)
     else:
         st.write(f"An error occurred!")
     #response = requests.get(urls.get_user_projects_info+st.session_state["token"])

@@ -47,10 +47,11 @@ def get_df(response):
 
 def get_df2(response):
     import pandas as pd
+    from datetime import datetime
     
     list_doc = []
     for doc in response.json():
-        dt = get_date(doc["date_creation"])
+        dt = datetime.strptime(doc["date_creation"], "%Y-%m-%d")
         current_doc = {
             "iemap_id": doc.get("iemap_id", None),
             "project": doc.get("project_name", None),

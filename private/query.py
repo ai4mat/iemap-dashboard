@@ -73,7 +73,7 @@ if st.button("Get your data"):
         # verify=False
     )
     if response.status_code == 200:
-        docs = response.content
+        docs = response
         st.echo(docs)
     else:
         print(f"An error occurred!")

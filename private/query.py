@@ -44,9 +44,9 @@ def get_df2(response):
     for doc in response.json():
         current_doc = {
             "iemap_id": doc.get("iemap_id", None),
-            "project": doc["project_name"],
-            "formula": doc.get("material", None).get("formula", None),
-            "created at": doc.get("createdAt", None)
+            "project": doc.get("project_name", None),
+            "formula": doc.get("material", None),
+            "created at": doc.get("date_creation", None)
             }
         list_doc.append(current_doc)
     df = pd.DataFrame(list_doc)
@@ -89,10 +89,10 @@ if st.button("Get your data"):
     )
     if response.status_code == 200:
         
-        # df = get_df2(response)
-        # st.dataframe(df, use_container_width=True)
-        for doc in response.json():
-            st.write(doc)
+        df = get_df2(response)
+        st.dataframe(df, use_container_width=True)
+        # for doc in response.json():
+        #     st.write(doc)
     else:
         st.write(f"An error occurred!")
     #response = requests.get(urls.get_user_projects_info+st.session_state["token"])

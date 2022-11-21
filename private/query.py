@@ -73,13 +73,11 @@ if st.button("Get your data"):
         # verify=False
     )
     if response.status_code == 200:
-        docs = json.loads(response.content)
-        # print(json.dumps(doc, indent=2))
-        return docs
+        docs = response.content
+        st.json(docs.json())
     else:
         print(f"An error occurred!")
     #response = requests.get(urls.get_user_projects_info+st.session_state["token"])
     #df = get_df(response)
-    st.json(response.json())
     #st.dataframe(df, use_container_width=True)
 # https://discuss.streamlit.io/t/how-to-set-page-config-default-layout-to-wide-without-calling-set-page-config/13872/2

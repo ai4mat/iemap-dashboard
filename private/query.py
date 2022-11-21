@@ -50,11 +50,12 @@ def get_df2(response):
     
     list_doc = []
     for doc in response.json():
+        dt = get_date(doc["date_creation"])
         current_doc = {
             "iemap_id": doc.get("iemap_id", None),
             "project": doc.get("project_name", None),
             "formula": doc.get("material", None),
-            "created at": get_date(doc.get("date_creation", None))
+            "created at": dt
             }
         list_doc.append(current_doc)
     df = pd.DataFrame(list_doc)

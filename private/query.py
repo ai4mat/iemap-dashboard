@@ -1,11 +1,6 @@
 import streamlit as st
-import datetime 
 
-def get_date(datestring):
-    if datestring == None:
-        return None
-    else:
-        return datetime.strptime(datestring, "%Y-%m-%d")
+
 
 #2022-11-20T11:26:55.952000
 
@@ -62,47 +57,57 @@ def get_df2(response):
     return df
     
 
-def on_click():
-    from components.endpoints import urls
-    import requests
+# def on_click():
+#     from components.endpoints import urls
+#     import requests
 
-    response = requests.get(urls.query)
-    df = get_df(response)
+#     response = requests.get(urls.query)
+#     df = get_df(response)
 
-    st.dataframe(df)
+#     st.dataframe(df)
 
+
+def get_date(datestring):
+    import datetime 
+    if datestring == None:
+        return None
+    else:
+        return datetime.strptime(datestring, "%Y-%m-%d")
 
 
 st.title("Query DB")
-st.markdown("Click button to query DB and get all data")
+st.markdown("Click button to query the Database")
 
-if st.button("Get all data"):
-    from components.endpoints import urls
-    import requests
+tab1, tab2 = st.tabs(["All Projects", "Your Projects"])
 
-    response = requests.get(urls.query)
-    df = get_df(response)
+with tab1:
+    st.header("All Projects")
+    if st.button("Get all data"):
+        from components.endpoints import urls
+        import requests
 
-    st.dataframe(df, use_container_width=True)
-#    on_click()
+        response = requests.get(urls.query)
+        df = get_df(response)
 
-if st.button("Get your data"):
-    from components.endpoints import urls
-    import requests
-
-    #ep = urls.get_user_projects_info.value
-    response = requests.get(
-        urls.get_user_projects_info,
-        headers={"Authorization": f"Bearer "+st.session_state["token"]},
-        # verify=False
-    )
-    if response.status_code == 200:
-        
-        df = get_df2(response)
         st.dataframe(df, use_container_width=True)
-    else:
-        st.write(f"An error occurred!")
-    #response = requests.get(urls.get_user_projects_info+st.session_state["token"])
-    #df = get_df(response)
-    #st.dataframe(df, use_container_width=True)
-# https://discuss.streamlit.io/t/how-to-set-page-config-default-layout-to-wide-without-calling-set-page-config/13872/2
+
+with tab2:
+    st.header("Your Projects")        
+    if st.button("Get your data"):
+        from components.endpoints import urls
+        import requests
+
+        #ep = urls.get_user_projects_info.value
+        response = requests.get(
+            urls.get_user_projects_info,
+            headers={"Authorization": f"Bearer "+st.session_state["token"]},
+            # verify=False
+        )
+        if response.status_code == 200:
+            
+            df = get_df2(response)
+            st.dataframe(df, use_container_width=True)
+        else:
+            st.write(f"An error occurred!")
+
+

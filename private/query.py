@@ -68,7 +68,7 @@ def get_df2(response):
 
 
 def get_date(datestring):
-    import datetime 
+    from datetime import datetime 
     if datestring == None:
         return None
     else:
@@ -76,7 +76,7 @@ def get_date(datestring):
 
 
 st.title("Query DB")
-st.markdown("Click button to query the Database")
+#st.markdown("Click button to query the Database")
 
 tab1, tab2 = st.tabs(["All Projects", "Your Projects"])
 

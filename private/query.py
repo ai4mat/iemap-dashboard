@@ -12,7 +12,7 @@ def get_df(response):
         isExperiment = bool(doc["process"]["isExperiment"])
         current_doc = {
             "iemap_id": doc.get("iemap_id", None),
-            "email": provenance["email"],
+    #        "email": provenance["email"],
             "affiliation": provenance["affiliation"],
             "created at": provenance.get("createdAt", None),
             "project": doc["project"]["name"],
@@ -52,7 +52,7 @@ def on_click():
 st.title("Query DB")
 st.markdown("Click button to query DB and get all data")
 
-if st.button("Query"):
+if st.button("Get all data"):
     from components.endpoints import urls
     import requests
 
@@ -62,4 +62,24 @@ if st.button("Query"):
     st.dataframe(df, use_container_width=True)
 #    on_click()
 
+if st.button("Get your data"):
+    from components.endpoints import urls
+    import requests
+
+    ep = urls.get_user_projects_info.value
+    response = requests.get(
+        ep,
+        headers={"Authorization": f"Bearer "+st.session_state["token"]},
+        # verify=False
+    )
+    if response.status_code == 200:
+        docs = json.loads(response.content)
+        # print(json.dumps(doc, indent=2))
+        return docs
+    else:
+        print(f"An error occurred!")
+    #response = requests.get(urls.get_user_projects_info+st.session_state["token"])
+    #df = get_df(response)
+    st.json(response.json())
+    #st.dataframe(df, use_container_width=True)
 # https://discuss.streamlit.io/t/how-to-set-page-config-default-layout-to-wide-without-calling-set-page-config/13872/2

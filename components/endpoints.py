@@ -5,3 +5,4 @@ class urls:
     post_metadata = f"{base_url}/api/v1/project/add"
     post_file = f"{base_url}/api/v1/project/add/file/?project_id="
     query = f"{base_url}/api/v1/project/query/"
+    get_user_projects_info = f"{base_url}/api/v1/user/projects/info"

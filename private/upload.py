@@ -7,7 +7,7 @@ from requests_toolbelt import MultipartEncoder
 
 st.title("Upload page")
 
-st.header("1- Upload metadata files")
+st.header("1- Upload metadata file")
 uploaded_md_file = st.file_uploader("Upload your metadata json file", type="json")
 if uploaded_md_file is not None:
     data = json.load(uploaded_md_file)
@@ -31,8 +31,8 @@ if st.button("Load Metadata"):
 
 st.write("\n")
 
-st.header("2- Upload data file")
-uploaded_files = st.file_uploader("Upload your data file", accept_multiple_files=True)
+st.header("2- Upload data files")
+uploaded_files = st.file_uploader("Upload your project data files", accept_multiple_files=True)
 for uploaded_file in uploaded_files:
     st.text(
         "File name: {}\nType: {}\nSize: {}".format(

@@ -2,7 +2,12 @@ import streamlit as st
 
 
 
-#2022-11-20T11:26:55.952000
+def get_date(datestring):
+    from datetime import datetime 
+    if datestring == None:
+        return None
+    else:
+        return datetime.strptime(datestring, "%Y-%m-%d")
 
 def get_df(response):
     import pandas as pd
@@ -67,12 +72,7 @@ def get_df2(response):
 #     st.dataframe(df)
 
 
-def get_date(datestring):
-    from datetime import datetime 
-    if datestring == None:
-        return None
-    else:
-        return datetime.strptime(datestring, "%Y-%m-%d")
+
 
 
 st.title("Query DB")

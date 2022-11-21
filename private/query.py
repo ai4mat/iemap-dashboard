@@ -74,7 +74,7 @@ if st.button("Get your data"):
     )
     if response.status_code == 200:
         docs = response.content
-        st.json(docs.json())
+        st.json(docs)
     else:
         print(f"An error occurred!")
     #response = requests.get(urls.get_user_projects_info+st.session_state["token"])

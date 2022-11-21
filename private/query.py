@@ -62,7 +62,7 @@ def get_df2(response):
     df = pd.DataFrame(list_doc)
     return df
     
-2022-11-18T11:11:35.159000
+
 
 
 

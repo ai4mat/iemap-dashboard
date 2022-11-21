@@ -37,6 +37,22 @@ def get_df(response):
     df = pd.DataFrame(list_doc)
     return df
 
+def get_df2(response):
+    import pandas as pd
+    
+    list_doc = []
+    for doc in response.json():
+        provenance = doc["provenance"]
+        current_doc = {
+            "iemap_id": doc.get("iemap_id", None),
+            "project": doc["project"]["name"],
+            "formula": doc.get("material", None).get("formula", None),
+            "created at": provenance.get("createdAt", None)
+            }
+        list_doc.append(current_doc)
+    df = pd.DataFrame(list_doc)
+    return df
+    
 
 def on_click():
     from components.endpoints import urls
@@ -74,10 +90,10 @@ if st.button("Get your data"):
     )
     if response.status_code == 200:
         
-        for doc in response.json():
-            st.write(doc)
+        df = get_df2(response)
+        st.dataframe(df, use_container_width=True)
     else:
-        print(f"An error occurred!")
+        st.write(f"An error occurred!")
     #response = requests.get(urls.get_user_projects_info+st.session_state["token"])
     #df = get_df(response)
     #st.dataframe(df, use_container_width=True)

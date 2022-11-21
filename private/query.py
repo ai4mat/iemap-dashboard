@@ -62,21 +62,11 @@ def get_df2(response):
     return df
     
 
-# def on_click():
-#     from components.endpoints import urls
-#     import requests
-
-#     response = requests.get(urls.query)
-#     df = get_df(response)
-
-#     st.dataframe(df)
-
 
 
 
 
 st.title("Query DB")
-#st.markdown("Click button to query the Database")
 
 tab1, tab2 = st.tabs(["All Projects", "Your Projects"])
 
@@ -87,9 +77,11 @@ with tab1:
         import requests
 
         response = requests.get(urls.query)
-        df = get_df(response)
-
-        st.dataframe(df, use_container_width=True)
+        if response.status_code == 200:
+            df = get_df(response)
+            st.dataframe(df, use_container_width=True)
+        else:
+            st.write(f"An error occurred!")
 
 with tab2:
     st.header("Your Projects")        
@@ -97,14 +89,11 @@ with tab2:
         from components.endpoints import urls
         import requests
 
-        #ep = urls.get_user_projects_info.value
         response = requests.get(
             urls.get_user_projects_info,
-            headers={"Authorization": f"Bearer "+st.session_state["token"]},
-            # verify=False
+            headers={"Authorization": f"Bearer "+st.session_state["token"]}
         )
-        if response.status_code == 200:
-            
+        if response.status_code == 200:           
             df = get_df2(response)
             st.dataframe(df, use_container_width=True)
         else:

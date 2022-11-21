@@ -66,9 +66,9 @@ if st.button("Get your data"):
     from components.endpoints import urls
     import requests
 
-    ep = urls.get_user_projects_info.value
+    #ep = urls.get_user_projects_info.value
     response = requests.get(
-        ep,
+        urls.get_user_projects_info,
         headers={"Authorization": f"Bearer "+st.session_state["token"]},
         # verify=False
     )

@@ -1,14 +1,6 @@
 import streamlit as st
 
 
-
-# def get_date(datestring):
-#     from datetime import datetime 
-#     if datestring == None:
-#         return None
-#     else:
-#         return datetime.fromisoformat(datestring)
-
 def get_df(response):
     import pandas as pd
     from datetime import datetime
@@ -22,7 +14,6 @@ def get_df(response):
         isExperiment = bool(doc["process"]["isExperiment"])
         current_doc = {
             "iemap_id": doc.get("iemap_id", None),
-    #        "email": provenance["email"],
             "affiliation": provenance["affiliation"],
             "created at": dt.date(),
             "project": doc["project"]["name"],
